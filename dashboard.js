@@ -13,7 +13,7 @@ async function sendAction(action) {
   statusDiv.textContent = 'Sending command...';
   const token = localStorage.getItem('access');
 
-  const response = await fetch('http://localhost:8000/api/server/control/', {
+  const response = await fetch('http://69.67.175.26:8000/api/server/control/', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${token}`,
