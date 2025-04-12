@@ -1,31 +1,44 @@
 
-if (!localStorage.getItem('access')) {
-  window.location.href = 'login.html';
-}
-
-function logout() {
-  localStorage.removeItem('access');
-  window.location.href = 'login.html';
-}
-
-async function sendAction(action) {
-  const statusDiv = document.getElementById('status');
-  statusDiv.textContent = 'Sending command...';
+async function saveCommand() {
+  const content = document.getElementById('commandInput').value;
   const token = localStorage.getItem('access');
+  const statusText = document.getElementById('status');
 
-  const response = await fetch('http://69.67.175.26:8000/api/server/control/', {
+  const response = await fetch('http://69.67.175.26:8000/api/commandline/', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ action })
+    body: JSON.stringify({ content })
   });
 
-  const data = await response.json();
   if (response.ok) {
-    statusDiv.textContent = data.status;
+    statusText.textContent = 'Command line saved!';
+    statusText.classList.remove('text-red-400');
+    statusText.classList.add('text-green-400');
   } else {
-    statusDiv.textContent = data.error || 'Command failed';
+    statusText.textContent = 'Failed to save command.';
+    statusText.classList.remove('text-green-400');
+    statusText.classList.add('text-red-400');
   }
 }
+
+async function loadCommand() {
+  const token = localStorage.getItem('access');
+
+  const response = await fetch('http://69.67.175.26:8000/api/commandline/', {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    document.getElementById('commandInput').value = data.content || "";
+  }
+}
+
+window.onload = () => {
+  loadCommand();
+};
