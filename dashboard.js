@@ -1,4 +1,22 @@
 
+async function controlServer(action) {
+  const token = localStorage.getItem('access');
+  const response = await fetch('http://69.67.175.26:8000/api/server/control/', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ action })
+  });
+
+  if (response.ok) {
+    console.log(`Server ${action} command sent.`);
+  } else {
+    console.error(`Failed to ${action} server.`);
+  }
+}
+
 async function saveCommand() {
   const content = document.getElementById('commandInput').value;
   const token = localStorage.getItem('access');
