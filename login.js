@@ -6,7 +6,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   const errorMsg = document.getElementById('error');
   errorMsg.classList.add('hidden');
 
-  const response = await fetch('http://localhost:8000/api/token/', {
+  const response = await fetch('http://69.67.175.26:8000/api/token/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password })
