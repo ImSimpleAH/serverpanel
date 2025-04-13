@@ -2,21 +2,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Dashboard - 28th CAD Panel</title>
+  <meta charset="UTF-8" />
+  <title>Server Dashboard</title>
   <script defer src="dashboard.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-900 text-white">
-  <div class="p-8">
-    <h1 class="text-3xl font-bold mb-6">28th CAD - Server Control Panel</h1>
-    <div class="space-x-4">
-      <button onclick="sendAction('start')" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded">Start</button>
-      <button onclick="sendAction('stop')" class="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded">Stop</button>
-      <button onclick="sendAction('restart')" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">Restart</button>
-      <button onclick="logout()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded float-right">Logout</button>
+<body class="bg-gray-900 text-white min-h-screen p-8">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6">Server Control Panel</h1>
+
+    <!-- Control Buttons -->
+    <div class="space-x-4 mb-6">
+      <button onclick="controlServer('start')" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg font-semibold">▶ Start</button>
+      <button onclick="controlServer('stop')" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg font-semibold">■ Stop</button>
+      <button onclick="controlServer('restart')" class="bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-lg font-semibold">⟳ Restart</button>
     </div>
-    <div id="status" class="mt-6 text-lg"></div>
+
+    <!-- Command Line Editor -->
+    <div class="mt-8 bg-gray-800 p-6 rounded-xl shadow-lg">
+      <h2 class="text-xl font-bold mb-4">Server Launch Command</h2>
+      <textarea id="commandInput" class="w-full p-4 rounded-lg bg-gray-700 text-white h-60 mb-4 resize-y" placeholder="Enter full startup command..."></textarea>
+      <div class="flex justify-between items-center">
+        <button onclick="saveCommand()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold">💾 Save Command Line</button>
+        <span id="status" class="text-green-400 text-sm"></span>
+      </div>
+    </div>
   </div>
 </body>
 </html>
