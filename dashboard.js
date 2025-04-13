@@ -12,5 +12,13 @@ function controlServer(action) {
     body: JSON.stringify({ action, profile })
   })
   .then(res => res.json())
-  .then(data => alert(data.status || data.error));
+  .then(data => {
+    if (data.status) {
+      alert(data.status);
+    } else if (data.error) {
+      alert("Error: " + data.error);
+    } else {
+      alert("Unauthorized or unknown error.");
+    }
+  });
 }
