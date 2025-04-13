@@ -1,6 +1,6 @@
 
 function controlServer(action) {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("access");
   const profile = document.getElementById("profileSelect").value;
 
   fetch("http://69.67.175.26:8000/api/server/control/", {
